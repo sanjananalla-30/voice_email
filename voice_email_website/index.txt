@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voice Email Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Voice Email System</h1>
+  <button onclick="location.href='compose.html'">Compose Email</button>
+  <button onclick="location.href='inbox.php'">Inbox</button>
+</body>
+</html>

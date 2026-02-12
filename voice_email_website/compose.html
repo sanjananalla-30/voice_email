@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Compose Email</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Compose Email</h2>
+  <form id="composeForm" action="send_email.php" method="POST">
+    <input type="email" id="to" name="to" placeholder="To" required><br>
+    <input type="text" id="subject" name="subject" placeholder="Subject"><br>
+    <textarea id="message" name="message" placeholder="Your message here..." required></textarea><br>
+    <input type="submit" value="Send">
+  </form>
+
+  <p id="status">Voice commands will appear here...</p>
+
+  <script>
+    function speak(text) {
+      const msg = new SpeechSynthesisUtterance(text);
+      msg.lang = 'en-US';
+      window.speechSynthesis.speak(msg);
+    }
+
+    function initVoiceControl() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        speak("Sorry, your browser does not support voice recognition.");
+        document.getElementById('status').textContent = "Voice recognition not supported.";
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+
+      recognition.onstart = () => {
+        document.getElementById('status').textContent = "Listening for commands...";
+speak("You can say: Email to, Subject is, Message is, or Send email.");
+      };
+
+      recognition.onresult = (event) => {
+        let command = event.results[event.results.length - 1][0].transcript.toLowerCase();
+        document.getElementById('status').textContent = `Heard: ${command}`;
+        console.log("Heard command:", command);
+
+       if (command.includes("email to")) {
+  let emailSpoken = command.replace("email to", "").trim();
+
+  // Replace spoken words with valid email characters
+  emailSpoken = emailSpoken
+    .replace(/ at /g, "@")
+    .replace(/ dot /g, ".")
+    .replace(/ underscore /g, "_")
+    .replace(/\s+/g, ""); // remove all spaces
+
+  document.getElementById("to").value = emailSpoken;
+  speak("Recipient set to " + emailSpoken);
+}
+ else if (command.includes("subject is")) {
+          const subj = command.replace("subject is", "").trim();
+          document.getElementById("subject").value = subj;
+          speak("Subject set to " + subj);
+
+        } else if (command.includes("message is")) {
+          const msg = command.replace("message is", "").trim();
+          document.getElementById("message").value = msg;
+          speak("Message set.");
+
+        } else if (command.includes("send email")) {
+          speak("Sending your email.");
+          document.getElementById("composeForm").submit();
+
+        } else if (command.includes("clear form")) {
+          document.getElementById("to").value = "";
+          document.getElementById("subject").value = "";
+          document.getElementById("message").value = "";
+          speak("Form cleared.");
+
+        } else {
+          speak("Sorry, I didn't understand. Try saying write to, subject is, message is, or send email.");
+        }
+      };
+
+      recognition.onerror = (event) => {
+        speak("Error: " + event.error);
+      };
+
+      recognition.onend = () => {
+        recognition.start(); // Restart continuously
+      };
+
+      setTimeout(() => recognition.start(), 1000);
+    }
+
+    window.onload = initVoiceControl;
+  </script>
+</body>
+</html>
