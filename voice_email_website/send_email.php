@@ -13,7 +13,7 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com'; // Use smtp-mail.outlook.com for Outlook
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'thanshithagurrala@gmail.com'; // Your Gmail
+    $mail->Username   = 'sanjananalla2008@gmail.com'; // Your Gmail
     $mail->Password   = 'jupoovygpnyyxkiu';    // Use an App Password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
