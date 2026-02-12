@@ -1,39 +1,67 @@
-# voice_email
-🎙️ Voice Email System
+🎤 Voice Email Website
 
-A Voice Email application that allows users to send and read emails using voice commands.
-This system enables hands-free email interaction using speech recognition and text-to-speech technology.
+A web-based email system with voice assistance that allows users to send, receive, read, and manage emails through a simple interface. The system integrates voice feedback using browser speech synthesis and email functionality using PHPMailer and IMAP.
 
-🚀 Features
-🎤 Convert speech to text
-📧 Send email using voice commands
-🔊 Read received emails aloud
-🔐 Secure login authentication
-🧠 Simple and user-friendly interface
-
+📌 Features
+📥 View inbox emails
+📤 Send emails
+🗑️ Delete emails
+📖 Read email content
+🎤 Voice greeting and voice feedback
+🔐 User authentication support (via database)
+📧 Email sending using PHPMailer
+📬 Email fetching using IMAP
+💻 Simple and responsive web interface
 🛠️ Technologies Used
-Python
-SpeechRecognition
-pyttsx3 (Text-to-Speech)
-smtplib
-imaplib
-EmailMessage
-Tkinter (for GUI, if applicable)
 
-🧑‍💻 How It Works
-User logs in with email credentials.
-The system listens for voice commands.
-Speech is converted into text.
-Email is sent or inbox is read based on the command.
-The system provides voice feedback to the user.
+Frontend:
+HTML
+CSS
+JavaScript (Speech Synthesis API)
+Backend:PHP
+Database:MySQL
+Libraries:PHPMailer,IMAP Protocol
 
-📌 Example Voice Commands
-“Send email”
-“Read my inbox”
-“Exit application”
+voice_email_website/
+│
+├── index.html            # Home page
+├── compose.html          # Compose email page
+├── inbox.php             # Inbox page
+├── read_email.php        # Read email content
+├── send_email.php        # Send email functionality
+├── delete_email.php      # Delete email functionality
+├── db_config.php         # Database configuration
+├── imap_config.php       # IMAP email configuration
+├── script.js             # Voice functionality
+├── style.css             # Styling
+├── inbox.css             # Inbox styling
+├── database.sql         # Database schema
+├── users.sql            # User table schema
+│
+└── PHPMailer/           # PHPMailer library
+    └── src/
+    
+⚙️ Requirements
+Make sure you have the following installed:
+XAMPP / WAMP / LAMP
+PHP 7.4 or higher
+MySQL
+Web browser (Chrome recommended for voice features)
+Internet connection
 
-📈 Future Enhancements
-Multi-language support
-Voice-based reply feature
+🎤 Voice Functionality
+This project uses:
+SpeechSynthesisUtterance API
+Provides voice greeting
+Reads messages aloud
+Supported browsers:
+✅ Google Chrome (Recommended)
+✅ Edge
+⚠️ Limited support in other browsers
+
+🚀 Future Improvements
+Voice commands for sending emails
+User login and authentication
 Attachment support
-Improved user interface
+Mobile responsiveness
+Accessibility improvements
